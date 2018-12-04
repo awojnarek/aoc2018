@@ -31,6 +31,24 @@ func offByOne(a string, b string) bool {
 	return false
 }
 
+func findAlikeString(x []string) string {
+	str1 := x[0]
+	str2 := x[1]
+	fmt.Println(str1)
+
+	arr1 := strings.Split(str1, "")
+	arr2 := strings.Split(str2, "")
+
+	for index, val := range arr1 {
+		if arr2[index] != val {
+			fmt.Println("found:", arr2[index], val)
+			arr1 = arr1[:index+copy(arr1[index:], arr1[index+1:])]
+			return strings.Join(arr1[:], "")
+		}
+	}
+	return "false"
+}
+
 func main() {
 
 	// Open our file
@@ -67,5 +85,6 @@ func main() {
 		}
 	}
 
-	fmt.Println(outputSlice)
+	stringAlike := findAlikeString(outputSlice)
+	fmt.Println(stringAlike)
 }
